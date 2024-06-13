@@ -1,10 +1,10 @@
-
+import HomePage from "../pages/Home/homePage.tsx";
 
 const Home = () => {
   return (
-    <div className=" ">
-      Home
-    </div>
+    <>
+      <HomePage />
+    </>
   )
 }
 

@@ -3,9 +3,9 @@
 @tailwind utilities;    
 
 ::-webkit-scrollbar {
-    width: 7px;
-  }
+  width: 4px;
+}
   
-  ::-webkit-scrollbar-thumb {
-    @apply bg-customPrimary;
-  }
+::-webkit-scrollbar-thumb {
+  @apply bg-customPrimary;
+}
