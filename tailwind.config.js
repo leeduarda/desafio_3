@@ -22,6 +22,7 @@ export default {
         customGray5: "#616161",
         customGray6: "#666666",
         customGray7: "#D9D9D9",
+        customGray8: "#F4F5F7",
         customYellow1: "#FFC700",
         customYellow2: "#F9F1E7",
         customYellow3: "#FFF3E3",
