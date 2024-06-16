@@ -27,6 +27,7 @@ export default {
         customYellow2: "#F9F1E7",
         customYellow3: "#FFF3E3",
         customYellow4: "#FAF3EA",
+        customYellow5: "#FCF8F3",
         customBlue: "#816DFA",        
       },
      },
