@@ -1,4 +1,4 @@
-import HomePage from "../pages/Home/homePage.tsx";
+import HomePage from "../pages/Home/HomePage.tsx";
 
 const Home = () => {
   return (
