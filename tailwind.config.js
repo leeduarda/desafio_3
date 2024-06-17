@@ -15,6 +15,7 @@ export default {
         customGreenAccents: "#2EC1AC",
         customBlack1: "#000000",
         customBlack2: "#333333",
+        customBlack3: "#242424",
         customGray1: "#3A3A3A",
         customGray2: "#9F9F9F",
         customGray3: "#898989",
