@@ -1,9 +1,9 @@
 const NewArrival = () => {
-  const imageHome1 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/homeImgs/imageHome1.png";
+  const imageBanner1 =
+    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/banners/banner1.png";
   return (
     <section className="relative">
-      <img className="w-full bg-cover object-contain" src={imageHome1} alt="" />
+      <img className="w-full bg-cover object-contain" src={imageBanner1} alt="" />
 
       <div className="xl:absolute xl:bottom-32 xl:right-32 xl:max-w-xl p-6 md:px-10 md:pb-9 md:pt-12 w-full bg-customYellow3">
         <h4 className=" font-poppins text-base font-semibold text-customBlack2 mb-1">

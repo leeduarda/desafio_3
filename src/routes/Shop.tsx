@@ -1,10 +1,13 @@
+import FooterQualityService from "../components/FooterQualityService";
+import ShopBannerCarrinho from "../pages/Shop/ShopBannerCarrinho";
 
 const Shop = () => {
   return (
-    <div>
-      Shop
-    </div>
-  )
-}
+    <>
+      <ShopBannerCarrinho />
+      <FooterQualityService />
+    </>
+  );
+};
 
-export default Shop
+export default Shop;

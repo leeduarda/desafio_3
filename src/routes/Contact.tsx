@@ -1,10 +1,13 @@
+import FooterQualityService from "../components/FooterQualityService";
+import BannerCaminho from "../pages/Contact/ContactBannerCaminho";
 
 const Contact = () => {
   return (
-    <div>
-      Contact
-    </div>
-  )
-}
+    <>
+      <BannerCaminho />
+      <FooterQualityService />
+    </>
+  );
+};
 
-export default Contact
+export default Contact;

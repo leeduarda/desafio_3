@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-// import FooterQualityService from "./components/FooterQualityService";
 
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
       <main>
       <Outlet />
       </main>
-      {/* <FooterQualityService /> */}
       <Footer />
     </>
   )
