@@ -15,8 +15,8 @@ const BannerCaminho = () => {
         alt=""
       />
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-customBlack1 gap-y-0 md:gap-y-3">
-        <img src={logoUrl} alt="" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-customBlack1 gap-y-0 md:gap-y-3 transition-all">
+        <img className="hidden sm:block sm:w-auto sm:h-auto" src={logoUrl} alt="" />
         <h2 className="font-poppins font-medium text-2xl md:text-5xl text-center">
           Contact
         </h2>
