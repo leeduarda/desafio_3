@@ -79,7 +79,7 @@ const OurProduct = () => {
         ) : (
           <div className="p-10 flex flex-col justify-center gap-8 items-center flex-wrap md:flex md:flex-row">
             {products.map((product) => (
-              <Link to="/contact">
+              <Link to="/productDetail">
                 <div key={product.id} className="group relative bg-customGray8">
                   {product.discountTrinta && renderDiscount(30)}
                   {product.discountCinquenta && renderDiscount(50)}

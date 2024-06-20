@@ -10,6 +10,8 @@ import Shop from './routes/Shop.tsx';
 import About from './routes/About.tsx';
 import Contact from './routes/Contact.tsx';
 
+import ProductPageDetail from './pages/Shop/ProductPageDetail.tsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/productDetail",
+        element: <ProductPageDetail />,
       },
     ]
   }
