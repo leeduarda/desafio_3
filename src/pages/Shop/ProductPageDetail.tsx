@@ -14,7 +14,7 @@ const ProductPageDetail = () => {
             Home
           </Link>
           <img className="mr-1" src={imageVector} alt="" />
-          <Link className="font-medium text-sm text-customGray2" to="/">
+          <Link className="font-medium text-sm text-customGray2" to="/shop">
             Shop
           </Link>
           <img className="mr-1" src={imageVector} alt="" />
