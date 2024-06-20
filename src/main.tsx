@@ -9,8 +9,7 @@ import Home from './routes/Home.tsx';
 import Shop from './routes/Shop.tsx';
 import About from './routes/About.tsx';
 import Contact from './routes/Contact.tsx';
-
-import ProductPageDetail from './pages/Shop/ProductPageDetail.tsx';
+import ProductDetail from './routes/ProductDetail.tsx';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/productDetail",
-        element: <ProductPageDetail />,
+        element: <ProductDetail />,
       },
     ]
   }
