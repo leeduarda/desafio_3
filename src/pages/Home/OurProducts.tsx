@@ -1,191 +1,141 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Product } from "../../types/Product";
+import { formatPrice } from "../../ts/formatPrice";
+import { Link } from "react-router-dom";
 
+const OurProduct = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-const OurProducts = () => {
-  const imgProduct1 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product1.png";
-  const imgProduct2 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product2.png";
-  const imgProduct3 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product3.png";
-  const imgProduct4 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product4.png";
-  const imgProduct5 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product5.png";
-  const imgProduct6 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product6.png";
-  const imgProduct7 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product7.png";
-  const imgProduct8 =
-    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/productsImgs/product8.png";
+  const iconShare =
+    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/icons/share.png";
+  const iconCompare =
+    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/icons/compare.png";
+  const iconHeart =
+    "https://imgsdesafio3.s3.us-east-2.amazonaws.com/icons/heart.png";
 
+  //Pegando os produtos do json, passando um tempo de 1000 segundos de carregamento dos produtos
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/productsHome");
+        setTimeout(() => {
+          setProducts(response.data);
+          setLoading(false);
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  //Calculando quantos produtos aparecem em cada pagina
+
+  //Renderizar como ficaria o disconto nos produtos
+  const renderDiscount = (discount: number) => {
+    return (
+      <div className="flex justify-center items-center absolute top-8 right-5 bg-customRedAccents w-9 h-9 p-5 rounded-full text-center text-base text-customWhite font-normal">
+        <p>-{discount}%</p>
+      </div>
+    );
+  };
+
+  //Renderizar o valor com desconto de 30% ou 50% e o valor antigo
+  const renderPrice = (product: Product) => {
+    if (product.discountTrinta || product.discountCinquenta) {
+      return (
+        <div className="flex justify-between flex-wrap">
+          <p className="font-poppins text-xl text-customGray1 font-semibold">
+            {formatPrice(product.priceDiscount)}
+          </p>
+          <p className="text-base text-customGray4 line-through">
+            {formatPrice(product.price)}
+          </p>
+        </div>
+      );
+    }
+
+    //Formatando o preço chamando a função formatPrice
+    return (
+      <div className="flex justify-between flex-wrap">
+        <p className="font-poppins text-xl text-customGray1 font-semibold">
+          {formatPrice(product.price)}
+        </p>
+      </div>
+    );
+  };
+
+  //Retornando o layout dos produtos e carregamento antes de exibir os produtos
   return (
     <section className="mb-16">
-      <h2 className="font-poppins font-bold text-3xl text-customGray1 text-center">
-        Our Products
-      </h2>
-      <div className="p-10 flex flex-col justify-center gap-8 items-center flex-wrap md:flex md:flex-row ">
-        <div className="bg-customGray8">
-          <img src={imgProduct1} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Syltherine
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Stylish cafe chair
-            </p>
-
-            <div className="bg-customGray8 flex justify-between flex-wrap">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 2.500.000
-              </p>
-              <p className="text-base text-customGray4 line-through">
-                Rp 3.500.000
-              </p>
-            </div>
+      <div className="relative overflow-hidden ">
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <p>Loading...</p>
           </div>
-        </div>
+        ) : (
+          <div className="p-10 flex flex-col justify-center gap-8 items-center flex-wrap md:flex md:flex-row">
+            {products.map((product) => (
+              <Link to="/contact">
+                <div key={product.id} className="group relative bg-customGray8">
+                  {product.discountTrinta && renderDiscount(30)}
+                  {product.discountCinquenta && renderDiscount(50)}
+                  {product.newProduct && (
+                    <div className="flex justify-center items-center absolute top-8 right-5 bg-customGreenAccents w-9 h-9 p-5 rounded-full text-center text-base text-customWhite font-normal">
+                      <p>New</p>
+                    </div>
+                  )}
+                  <div className="w-full object-cover">
+                    <img src={product.imgUrl} alt={product.name} />
+                  </div>
+                  <div className="absolute h-full w-full bg-customGray1/70 flex flex-col items-center justify-center gap-3 -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <Link to="/">
+                      <button className="bg-customWhite text-customPrimary text-base font-poppins font-semibold py-2 px-12 hover:scale-110 transition-all">
+                        Add to cart
+                      </button>
+                    </Link>
 
-        <div className="bg-customGray8">
-          <img src={imgProduct2} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Leviosa
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Stylish cafe chair
-            </p>
-
-            <div className="bg-customGray8 flex justify-between">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 2.500.000
-              </p>
-            </div>
+                    <div className="flex flex-row items-center gap-5 text-customWhite text-base font-poppins font-semibold">
+                      <Link to="/">
+                        <button className="flex flex-row items-center gap-1">
+                          <img src={iconShare} />
+                          Share
+                        </button>
+                      </Link>
+                      <Link to="/">
+                        <button className="flex flex-row items-center gap-1">
+                          <img src={iconCompare} />
+                          Compare
+                        </button>
+                      </Link>
+                      <Link to="/">
+                        <button className="flex flex-row items-center gap-1">
+                          <img src={iconHeart} />
+                          Like
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="p-5 pb-5 pt-2 px-5">
+                    <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
+                      {product.name}
+                    </h4>
+                    <p className="font-poppins text-base font-medium text-customGray3 mb-2">
+                      {product.subtitle}
+                    </p>
+                    {renderPrice(product)}
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct3} alt="" />
-
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Lolito
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Luxury big sofa
-            </p>
-
-            <div className="bg-customGray8 flex justify-between flex-wrap">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 7.000.000
-              </p>
-              <p className="text-base text-customGray4 line-through">
-                Rp 14.000.000
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct4} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Respira
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Outdoor bar table and stool
-            </p>
-
-            <div className="bg-customGray8 flex justify-between">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 500.000
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct5} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Grifo
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Night lamp
-            </p>
-
-            <div className="bg-customGray8 flex justify-between">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 1.500.000
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct6} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Muggo
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Small mug
-            </p>
-
-            <div className="bg-customGray8 flex justify-between">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 150.000
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct7} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Pingky
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Cute bed set
-            </p>
-
-            <div className="bg-customGray8 flex justify-between  flex-wrap">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 7.000.000
-              </p>
-              <p className="text-base text-customGray4 line-through">
-                Rp 14.000.000
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-customGray8">
-          <img src={imgProduct8} alt="" />
-          <div className="p-5 pb-5 pt-2 px-5">
-            <h4 className="font-poppins text-2xl text-customGray1 font-semibold mb-2">
-              Potty
-            </h4>
-            <p className="font-poppins text-base font-medium text-customGray3 mb-2">
-              Minimalist flower pot
-            </p>
-
-            <div className="bg-customGray8 flex justify-between">
-              <p className="font-poppins text-xl text-customGray1 font-semibold">
-                Rp 500.000
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-center">
-        <button className=" border border-customPrimary py-3 px-14 md:px-20 font-poppins text-base text-center font-bold text-customPrimary transition-all hover:text-customWhite hover:bg-customPrimary">
-          Show More
-        </button>
+        )}
       </div>
     </section>
   );
 };
 
-export default OurProducts;
+export default OurProduct;
