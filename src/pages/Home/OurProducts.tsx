@@ -32,8 +32,6 @@ const OurProduct = () => {
     getProducts();
   }, []);
 
-  //Calculando quantos produtos aparecem em cada pagina
-
   //Renderizar como ficaria o disconto nos produtos
   const renderDiscount = (discount: number) => {
     return (
